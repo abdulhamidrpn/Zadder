@@ -19,21 +19,6 @@ This course covers a range of topics including:
 - **Wallpaper:** Set Wallpaper at one click.
 - **Shared Element Transitions** Animated Image card.
 
-Make it functional by adding the below properties **local.properties**
-**Note:** The file must be added.
-- UNSPLASH_API_KEY = "n1cFhpkyMRZ..."
-
-- #Test Ads Id
-- ADMOB_APP_ID = ca-app-pub-3940256099942544~3347511713
-- ADMOB_BANNER_AD = "ca-app-pub-3940256099942544/6300978111"
-- ADMOB_INTERSTITIAL_AD = "ca-app-pub-3940256099942544/1033173712"
-- ADMOB_REWARDED_AD = "ca-app-pub-3940256099942544/5224354917"
-
-- STORE_FILE=path/to/your/keystore.jks
-- STORE_PASSWORD=password
-- KEY_ALIAS=key0
-- KEY_PASSWORD=password
-
 ## App Screenshot
 <table>
   <tr>
@@ -57,5 +42,19 @@ Make it functional by adding the below properties **local.properties**
  </table>
 
 
+Make it functional by adding the below properties **local.properties**
+**Note:** The file must be added.
+- UNSPLASH_API_KEY = "n1cFhpkyMRZ..."
+
+- #Test Ads Id
+- ADMOB_APP_ID = ca-app-pub-3940256099942544~3347511713
+- ADMOB_BANNER_AD = "ca-app-pub-3940256099942544/6300978111"
+- ADMOB_INTERSTITIAL_AD = "ca-app-pub-3940256099942544/1033173712"
+- ADMOB_REWARDED_AD = "ca-app-pub-3940256099942544/5224354917"
+
+- STORE_FILE=path/to/your/keystore.jks
+- STORE_PASSWORD=password
+- KEY_ALIAS=key0
+- KEY_PASSWORD=password
 
  
