@@ -10,15 +10,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.imagevista"
-    compileSdk = 34
+    namespace = "com.rpn.zadder"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.imagevista"
+        applicationId = "com.rpn.zadder"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 35
+        versionCode = 4
+        versionName = "4.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -27,17 +27,52 @@ android {
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
         buildConfigField("String", "UNSPLASH_API_KEY", properties.getProperty("UNSPLASH_API_KEY"))
+
+        buildConfigField("String", "ADMOB_BANNER_AD", properties.getProperty("ADMOB_BANNER_AD"))
+        buildConfigField("String", "ADMOB_INTERSTITIAL_AD", properties.getProperty("ADMOB_INTERSTITIAL_AD"))
+        buildConfigField("String", "ADMOB_REWARDED_AD", properties.getProperty("ADMOB_REWARDED_AD"))
+
+        // Read admob_app_id from local.properties
+        val admobAppId: String = properties.getProperty("ADMOB_APP_ID") ?: ""
+        manifestPlaceholders["ADMOB_APP_ID"] = admobAppId
+    }
+
+
+    signingConfigs {
+        // We use a bundled debug keystore, to allow debug builds from CI to be upgradable
+        named("debug") {}
+        create("release") {
+            val keystorePropertiesFile = project.rootProject.file("local.properties")
+            val properties = Properties()
+            properties.load(keystorePropertiesFile.inputStream())
+
+            storeFile = rootProject.file("keystore.jks")
+            storePassword = properties["STORE_PASSWORD"] as String
+            keyAlias = properties["KEY_ALIAS"] as String
+            keyPassword = properties["KEY_PASSWORD"] as String
+        }
     }
 
     buildTypes {
-        release {
-            isMinifyEnabled = false
+
+        getByName("release") {
+            isShrinkResources = true
+            isMinifyEnabled = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+        }
+        getByName("debug") {
+            isShrinkResources = true
+            isMinifyEnabled = true
+            isDebuggable = true
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -77,11 +112,24 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+
+    // WorkManager
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.localbroadcastmanager)
+
     //compose
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.animation)
     implementation(libs.coil.compose)
+
+    //Google Ads
+    implementation(libs.google.ads)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.google.firebase.crashlytics)
+    implementation(libs.google.firebase.analytics)
 
     // Room
     ksp(libs.androidx.room.compiler)
@@ -104,10 +152,12 @@ dependencies {
 
     // Retrofit
     implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
     implementation(libs.converter.gson)
     implementation(libs.converter.scalars)
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
     //Dagger-Hilt
     implementation(libs.hilt.android)

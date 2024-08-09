@@ -16,9 +16,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://jitpack.io") } // this one for Ketch Download
     }
 }
 
-rootProject.name = "ImageVista"
+rootProject.name = "Zadder"
 include(":app")
  
