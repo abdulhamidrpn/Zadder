@@ -1,11 +1,10 @@
-# Zadder Android App
+# 🚀 Zadder Android Wallpaper App 🚀
 
-Welcome to the Zadder Android App repository. We will build an amazing Android application that showcases beautiful images from the Unsplash API. We'll be using a range of powerful libraries and frameworks to develop our app. Here's what you'll learn: Jetpack Compose, Material 3, Splash Screen, Paging 3, Coil, Dagger Hilt, Compose Navigation, Retrofit and Room.
+Welcome to the Zadder Android App repository. This is an amazing Android application that showcases beautiful images from the Unsplash API.
 
 ## App Overview
 
-This course covers a range of topics including:
-
+🛠 Technologies and Libraries Used:
 - **Jetpack Compose:** To build the User Interface
 - **Material 3:** To Design a beautiful and consistent UI.
 - **Splash Screen:** To create a captivating splash screen for our app.
